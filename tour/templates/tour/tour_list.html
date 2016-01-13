@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Туры</h2>
+<form action="{% url 'tours:list' %}" method="get">
+    <label for="destination_country">Отдых в</label>
+    <select id="destination_country" name="destination_country">
+        <option value="">любой стране</option>
+        {% for country in countries %}
+        <option value="{{country.pk}}">{{country.name}}</option>
+        {% endfor %}
+    </select>
+    <label for="from_city">Вылет из</label>
+    <select id="from_city" name="from_city">
+        <option value="">любого города</option>
+        {% for city in cities %}
+        <option value="{{city.pk}}">{{city.name}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Фильтровать</button>
+</form>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Место отдыха</th>
+            <th>Продолжительность</th>
+            <th>Стоимость</th>
+            <th>Начало заезда</th>
+            <th>Отправка из</th>
+            <th>Дата отправки</th>
+            <th>Окончание заезда</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tour in tours %}
+        <tr>
+            <td>{{tour}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
